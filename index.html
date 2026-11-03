@@ -23,6 +23,31 @@
   >
   <link rel="stylesheet" href="./css/style.css">
   <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
+  <link rel="canonical" href="https://project-saionara.vercel.app/">
+  <meta name="theme-color" content="#fff8f8">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="Nara Nails Designer">
+  <meta property="og:title" content="Nara Nails Designer | Beleza e cuidado">
+  <meta property="og:description" content="Alongamento em gel, nail art e atendimento personalizado para valorizar sua beleza.">
+  <meta property="og:url" content="https://project-saionara.vercel.app/">
+  <meta property="og:image" content="https://project-saionara.vercel.app/assets/images/hero-nara.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "NailSalon",
+      "name": "Nara Nails Designer",
+      "url": "https://project-saionara.vercel.app/",
+      "image": "https://project-saionara.vercel.app/assets/images/hero-nara.jpg",
+      "telephone": "+55 84 99135-0714",
+      "description": "Alongamento em gel, nail art e atendimento personalizado.",
+      "areaServed": "Planalto",
+      "sameAs": [
+        "https://www.instagram.com/naranailsdesigner15/"
+      ]
+    }
+  </script>
 </head>
 
 <body>
@@ -32,7 +57,7 @@
   <header class="header">
     <div class="container header-container">
 
-      <a href="./index.html" class="logo">
+      <a href="/" class="logo">
         Nara Nails
       </a>
 
@@ -49,11 +74,11 @@
       </button>
 
       <nav id="navigation" class="navigation" aria-label="Navegação principal">
-        <a href="./index.html">Início</a>
-        <a href="./sobre.html">Sobre</a>
-        <a href="./servicos.html">Serviços</a>
-        <a href="./galeria.html">Galeria</a>
-        <a href="./contato.html">Contato</a>
+        <a href="/">Início</a>
+        <a href="/sobre">Sobre</a>
+        <a href="/servicos">Serviços</a>
+        <a href="/galeria">Galeria</a>
+        <a href="/contato">Contato</a>
       </nav>
 
     </div>
@@ -82,14 +107,14 @@
           <div class="hero-actions">
 
             <a
-              href="./contato.html"
+              href="/contato"
               class="button"
             >
               Agendar horário
             </a>
 
             <a
-              href="./galeria.html"
+              href="/galeria"
               class="secondary-button"
             >
               Ver trabalhos
@@ -138,25 +163,205 @@
       </div>
     </section>
 
+    <section class="home-services" aria-labelledby="home-services-title">
+      <div class="container">
+
+        <div class="home-section-heading">
+          <div>
+            <p class="section-subtitle">Escolha seu cuidado</p>
+            <h2 id="home-services-title">
+              Um cuidado pensado para o seu estilo
+            </h2>
+          </div>
+
+          <a href="/servicos" class="text-link">
+            Ver todos os serviços <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+
+        <div class="home-services-grid">
+
+          <article class="home-service-card">
+            <span class="home-service-index">01</span>
+
+            <div>
+              <h3>Fibra de vidro</h3>
+              <p>
+                Alongamento resistente, leve e com acabamento delicado para
+                acompanhar sua rotina.
+              </p>
+            </div>
+
+            <div class="home-service-footer">
+              <strong>R$ 80,00</strong>
+              <a
+                href="https://wa.me/5584991350714?text=Olá,%20Nara!%20Gostaria%20de%20agendar%20Fibra%20de%20Vidro."
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Agendar <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </article>
+
+          <article class="home-service-card home-service-card-featured">
+            <span class="home-service-index">02</span>
+
+            <div>
+              <h3>Esmaltação em gel</h3>
+              <p>
+                Brilho intenso, acabamento uniforme e mais durabilidade para
+                suas unhas.
+              </p>
+            </div>
+
+            <div class="home-service-footer">
+              <strong>R$ 30,00</strong>
+              <a
+                href="https://wa.me/5584991350714?text=Olá,%20Nara!%20Gostaria%20de%20agendar%20Esmaltação%20em%20Gel."
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Agendar <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </article>
+
+          <article class="home-service-card">
+            <span class="home-service-index">03</span>
+
+            <div>
+              <h3>Pedicure em gel</h3>
+              <p>
+                Cuidado completo para os pés com brilho, conforto e acabamento
+                duradouro.
+              </p>
+            </div>
+
+            <div class="home-service-footer">
+              <strong>R$ 40,00</strong>
+              <a
+                href="https://wa.me/5584991350714?text=Olá,%20Nara!%20Gostaria%20de%20agendar%20Pedicure%20em%20Gel."
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Agendar <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <section class="home-gallery-preview" aria-labelledby="home-gallery-title">
+      <div class="container">
+
+        <div class="home-section-heading">
+          <div>
+            <p class="section-subtitle">Inspire-se</p>
+            <h2 id="home-gallery-title">
+              Detalhes que fazem toda a diferença
+            </h2>
+          </div>
+
+          <a href="/galeria" class="text-link">
+            Ver galeria <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+
+        <div class="home-gallery-grid">
+
+          <a href="/galeria" class="home-gallery-card home-gallery-card-large">
+            <img
+              src="./assets/images/gallery/unha-05.jpg"
+              alt="Unhas amendoadas com francesinha branca e detalhes dourados"
+              loading="lazy"
+            >
+            <span>
+              <small>Nail art</small>
+              Francesinha com dourado
+            </span>
+          </a>
+
+          <a href="/galeria" class="home-gallery-card">
+            <img
+              src="./assets/images/gallery/unha-07.jpg"
+              alt="Pés com esmaltação branca"
+              loading="lazy"
+            >
+            <span>
+              <small>Pedicure</small>
+              Cuidado completo
+            </span>
+          </a>
+
+          <a href="/galeria" class="home-gallery-card">
+            <img
+              src="./assets/images/gallery/unha-12.jpg"
+              alt="Unhas curtas com esmaltação prata metálica"
+              loading="lazy"
+            >
+            <span>
+              <small>Esmaltação em gel</small>
+              Efeito metálico
+            </span>
+          </a>
+
+        </div>
+
+      </div>
+    </section>
+
+    <section class="home-final-cta" aria-labelledby="home-final-cta-title">
+      <div class="container">
+        <div class="home-final-cta-inner">
+          <div>
+            <p class="section-subtitle">Seu próximo estilo</p>
+            <h2 id="home-final-cta-title">
+              Pronta para se sentir ainda mais bonita?
+            </h2>
+            <p>
+              Escolha seu serviço e fale com a Nara para consultar os horários
+              disponíveis.
+            </p>
+          </div>
+
+          <div class="home-final-actions">
+            <a href="/contato" class="button">Agendar atendimento</a>
+            <a
+              href="https://wa.me/5584991350714?text=Olá,%20Nara!%20Gostaria%20de%20consultar%20os%20horários%20disponíveis."
+              target="_blank"
+              rel="noopener noreferrer"
+              class="secondary-button"
+            >
+              Falar no WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <footer class="site-footer">
     <div class="container site-footer-content">
       <div class="site-footer-brand">
-        <a href="./index.html" class="logo">Nara Nails</a>
+        <a href="/" class="logo">Nara Nails</a>
         <p>Beleza, cuidado e elegância em cada detalhe.</p>
       </div>
 
       <nav class="site-footer-links" aria-label="Links do rodapé">
-        <a href="./sobre.html">Sobre</a>
-        <a href="./servicos.html">Serviços</a>
-        <a href="./galeria.html">Galeria</a>
-        <a href="./contato.html">Contato</a>
+        <a href="/sobre">Sobre</a>
+        <a href="/servicos">Serviços</a>
+        <a href="/galeria">Galeria</a>
+        <a href="/contato">Contato</a>
       </nav>
 
       <div class="site-footer-action">
         <span>Pronta para o seu próximo estilo?</span>
-        <a href="./contato.html">Agendar horário <span aria-hidden="true">↗</span></a>
+        <a href="/contato">Agendar horário <span aria-hidden="true">↗</span></a>
       </div>
     </div>
 

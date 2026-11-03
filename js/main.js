@@ -46,6 +46,10 @@ document.addEventListener("DOMContentLoaded", () => {
       ".contact-card",
       ".contact-form-wrapper",
       ".contact-notice",
+      ".home-section-heading",
+      ".home-service-card",
+      ".home-gallery-card",
+      ".home-final-cta-inner",
     ];
     const revealElements = [
       ...document.querySelectorAll(revealSelectors.join(", ")),
@@ -95,6 +99,111 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   setupRevealAnimations();
+
+  function setupGalleryLightbox() {
+    const galleryItems = [
+      ...document.querySelectorAll(".gallery-item"),
+    ];
+
+    if (!galleryItems.length) {
+      return;
+    }
+
+    const lightbox = document.createElement("div");
+
+    lightbox.className = "lightbox";
+    lightbox.hidden = true;
+    lightbox.innerHTML = [
+      '<div class="lightbox-dialog" role="dialog" aria-modal="true" aria-labelledby="lightbox-title">',
+      '<button class="lightbox-close" type="button" aria-label="Fechar imagem">×</button>',
+      '<div class="lightbox-media"><img src="" alt=""></div>',
+      '<div class="lightbox-copy">',
+      '<span class="lightbox-category"></span>',
+      '<h2 id="lightbox-title"></h2>',
+      "</div>",
+      "</div>",
+    ].join("");
+
+    document.body.appendChild(lightbox);
+
+    const lightboxImage = lightbox.querySelector(".lightbox-media img");
+    const lightboxCategory = lightbox.querySelector(".lightbox-category");
+    const lightboxTitle = lightbox.querySelector("#lightbox-title");
+    const closeButton = lightbox.querySelector(".lightbox-close");
+    let previousFocus;
+
+    function closeLightbox() {
+      if (lightbox.hidden) {
+        return;
+      }
+
+      lightbox.hidden = true;
+      document.body.classList.remove("lightbox-open");
+      previousFocus?.focus();
+    }
+
+    function openLightbox(item) {
+      const source = item.querySelector("img");
+      const category = item.querySelector("figcaption span");
+      const title = item.querySelector("figcaption strong");
+
+      if (!source || !lightboxImage || !lightboxCategory || !lightboxTitle) {
+        return;
+      }
+
+      lightboxImage.src = source.src;
+      lightboxImage.alt = source.alt;
+      lightboxCategory.textContent = category?.textContent || "Galeria";
+      lightboxTitle.textContent =
+        title?.textContent || "Trabalho Nara Nails";
+      previousFocus = item;
+      lightbox.hidden = false;
+      document.body.classList.add("lightbox-open");
+      closeButton?.focus();
+    }
+
+    closeButton?.addEventListener("click", closeLightbox);
+
+    lightbox.addEventListener("click", (event) => {
+      if (event.target === lightbox) {
+        closeLightbox();
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        closeLightbox();
+      }
+    });
+
+    galleryItems.forEach((item) => {
+      const image = item.querySelector("img");
+
+      if (!image) {
+        return;
+      }
+
+      item.classList.add("is-lightbox");
+      item.setAttribute("role", "button");
+      item.setAttribute("tabindex", "0");
+      item.setAttribute("aria-label", "Ampliar: " + image.alt);
+
+      item.addEventListener("click", () => {
+        openLightbox(item);
+      });
+
+      item.addEventListener("keydown", (event) => {
+        if (event.key !== "Enter" && event.key !== " ") {
+          return;
+        }
+
+        event.preventDefault();
+        openLightbox(item);
+      });
+    });
+  }
+
+  setupGalleryLightbox();
 
   // Menu mobile
   if (menuToggle && navigation) {
@@ -157,6 +266,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const dateInput = document.querySelector("#date");
   const timeSelect = document.querySelector("#time");
   const timeHelp = document.querySelector("#time-help");
+  const formStatus = document.querySelector("#form-status");
 
   const whatsappNumber = "5584991350714";
 
@@ -166,6 +276,17 @@ document.addEventListener("DOMContentLoaded", () => {
     "14:00",
     "17:00",
   ];
+
+  function setFormStatus(message, type = "") {
+    if (!formStatus) {
+      return;
+    }
+
+    formStatus.textContent = message;
+    formStatus.className = type
+      ? "form-status is-" + type
+      : "form-status";
+  }
 
   function formatDateForInput(date) {
     const year = date.getFullYear();
@@ -200,6 +321,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!selectedDate) {
       resetTimeSelect();
+      setFormStatus("");
 
       if (timeHelp) {
         timeHelp.textContent =
@@ -208,6 +330,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       return;
     }
+
+    setFormStatus("");
 
     const [year, month, day] = selectedDate
       .split("-")
@@ -232,9 +356,11 @@ document.addEventListener("DOMContentLoaded", () => {
           "A Nara atende apenas de segunda a sábado.";
       }
 
-      alert(
-        "A Nara não atende aos domingos. Escolha uma data entre segunda e sábado."
+      setFormStatus(
+        "A Nara não atende aos domingos. Escolha uma data entre segunda e sábado.",
+        "error"
       );
+      dateInput.focus();
 
       return;
     }
@@ -279,6 +405,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (contactForm) {
     contactForm.addEventListener("submit", (event) => {
       event.preventDefault();
+      setFormStatus("");
 
       const nameInput = document.querySelector("#name");
       const serviceSelect =
@@ -294,25 +421,25 @@ document.addEventListener("DOMContentLoaded", () => {
         messageInput?.value.trim() || "";
 
       if (!name) {
-        alert("Por favor, informe seu nome.");
+        setFormStatus("Por favor, informe seu nome.", "error");
         nameInput?.focus();
         return;
       }
 
       if (!service) {
-        alert("Por favor, selecione um serviço.");
+        setFormStatus("Por favor, selecione um serviço.", "error");
         serviceSelect?.focus();
         return;
       }
 
       if (!date) {
-        alert("Por favor, escolha uma data.");
+        setFormStatus("Por favor, escolha uma data.", "error");
         dateInput?.focus();
         return;
       }
 
       if (!time) {
-        alert("Por favor, escolha um horário.");
+        setFormStatus("Por favor, escolha um horário.", "error");
         timeSelect?.focus();
         return;
       }
@@ -343,6 +470,11 @@ document.addEventListener("DOMContentLoaded", () => {
         whatsappUrl,
         "_blank",
         "noopener,noreferrer"
+      );
+
+      setFormStatus(
+        "O WhatsApp foi aberto com sua mensagem pronta para confirmar o horário.",
+        "success"
       );
     });
   }

@@ -1,22 +1,79 @@
 document.addEventListener("DOMContentLoaded", () => {
   const menuToggle = document.querySelector(".menu-toggle");
   const navigation = document.querySelector(".navigation");
+  const header = document.querySelector(".header");
+
+  function updateHeaderState() {
+    header?.classList.toggle("is-scrolled", window.scrollY > 12);
+  }
+
+  function closeMenu() {
+    if (!menuToggle || !navigation) {
+      return;
+    }
+
+    navigation.classList.remove("active");
+    menuToggle.classList.remove("active");
+    menuToggle.setAttribute("aria-expanded", "false");
+    menuToggle.setAttribute("aria-label", "Abrir menu");
+  }
+
+  updateHeaderState();
+  window.addEventListener("scroll", updateHeaderState, { passive: true });
 
   // Menu mobile
   if (menuToggle && navigation) {
     menuToggle.addEventListener("click", () => {
-      const isOpen = navigation.classList.toggle("active");
+      const isOpen = !navigation.classList.contains("active");
 
-      menuToggle.classList.toggle("active");
+      navigation.classList.toggle("active", isOpen);
+      menuToggle.classList.toggle("active", isOpen);
       menuToggle.setAttribute("aria-expanded", String(isOpen));
+      menuToggle.setAttribute(
+        "aria-label",
+        isOpen ? "Fechar menu" : "Abrir menu"
+      );
     });
 
+    const currentPage =
+      window.location.pathname.split("/").pop() || "index.html";
+
     navigation.querySelectorAll("a").forEach((link) => {
+      const linkPage =
+        new URL(link.href, window.location.href).pathname.split("/").pop() ||
+        "index.html";
+
+      if (linkPage === currentPage) {
+        link.classList.add("is-active");
+        link.setAttribute("aria-current", "page");
+      }
+
       link.addEventListener("click", () => {
-        navigation.classList.remove("active");
-        menuToggle.classList.remove("active");
-        menuToggle.setAttribute("aria-expanded", "false");
+        closeMenu();
       });
+    });
+
+    document.addEventListener("click", (event) => {
+      if (
+        navigation.classList.contains("active") &&
+        !navigation.contains(event.target) &&
+        !menuToggle.contains(event.target)
+      ) {
+        closeMenu();
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && navigation.classList.contains("active")) {
+        closeMenu();
+        menuToggle.focus();
+      }
+    });
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 768) {
+        closeMenu();
+      }
     });
   }
 

@@ -20,6 +20,8 @@
 
 <body>
 
+  <a class="skip-link" href="#main-content">Pular para o conteúdo</a>
+
   <header class="header">
     <div class="container header-container">
 
@@ -39,7 +41,7 @@
         <span></span>
       </button>
 
-      <nav id="navigation" class="navigation">
+      <nav id="navigation" class="navigation" aria-label="Navegação principal">
         <a href="./index.html">Início</a>
         <a href="./sobre.html">Sobre</a>
         <a href="./servicos.html">Serviços</a>
@@ -50,7 +52,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main-content">
 
     <section class="hero">
       <div class="container hero-container">
@@ -130,6 +132,32 @@
     </section>
 
   </main>
+
+  <footer class="site-footer">
+    <div class="container site-footer-content">
+      <div class="site-footer-brand">
+        <a href="./index.html" class="logo">Nara Nails</a>
+        <p>Beleza, cuidado e elegância em cada detalhe.</p>
+      </div>
+
+      <nav class="site-footer-links" aria-label="Links do rodapé">
+        <a href="./sobre.html">Sobre</a>
+        <a href="./servicos.html">Serviços</a>
+        <a href="./galeria.html">Galeria</a>
+        <a href="./contato.html">Contato</a>
+      </nav>
+
+      <div class="site-footer-action">
+        <span>Pronta para o seu próximo estilo?</span>
+        <a href="./contato.html">Agendar horário <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+
+    <div class="container site-footer-bottom">
+      <span>Nara Nails Designer</span>
+      <span>Atendimento com hora marcada no Planalto</span>
+    </div>
+  </footer>
 
   <script src="./js/main.js"></script>
 

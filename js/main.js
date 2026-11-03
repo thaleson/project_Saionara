@@ -21,6 +21,81 @@ document.addEventListener("DOMContentLoaded", () => {
   updateHeaderState();
   window.addEventListener("scroll", updateHeaderState, { passive: true });
 
+  function setupRevealAnimations() {
+    const motionQuery = window.matchMedia(
+      "(prefers-reduced-motion: no-preference)"
+    );
+
+    if (!motionQuery.matches) {
+      return;
+    }
+
+    const revealSelectors = [
+      ".about-image-wrapper",
+      ".about-content",
+      ".services-heading",
+      ".service-card",
+      ".services-cta",
+      ".gallery-heading",
+      ".gallery-video-text",
+      ".gallery-video-card",
+      ".gallery-item",
+      ".gallery-instagram",
+      ".gallery-cta",
+      ".contact-heading",
+      ".contact-card",
+      ".contact-form-wrapper",
+      ".contact-notice",
+    ];
+    const revealElements = [
+      ...document.querySelectorAll(revealSelectors.join(", ")),
+    ];
+
+    if (!revealElements.length) {
+      return;
+    }
+
+    document.body.classList.add("has-motion");
+
+    revealElements.forEach((element, index) => {
+      element.classList.add("reveal");
+      element.style.setProperty(
+        "--reveal-delay",
+        `${Math.min(index % 4, 3) * 70}ms`
+      );
+    });
+
+    if (!("IntersectionObserver" in window)) {
+      revealElements.forEach((element) => {
+        element.classList.add("is-visible");
+      });
+      return;
+    }
+
+    const revealObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            return;
+          }
+
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        });
+      },
+      {
+        threshold: 0.15,
+        rootMargin: "0px 0px -32px",
+      }
+    );
+
+    revealElements.forEach((element) => {
+      revealObserver.observe(element);
+    });
+  }
+
+  setupRevealAnimations();
+
   // Menu mobile
   if (menuToggle && navigation) {
     menuToggle.addEventListener("click", () => {
